@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <style>
+      body {
+      padding: 0;
+      margin: 0;
+      background-color: white;
+      }
+
+      div#left {
+      float: left;
+      width: 66%;
+      height: 100vh;
+      background-color: #265770;
+      /* background-color: #3D8FB8; */
+      text-align: center;
+      }
+
+      div#left object {
+      margin-top: 5em;
+      max-width: 90%;
+      }
+
+      div#right {
+      float: left;
+      }
+      
+      ul {
+      list-style-position: inside;
+      }
+
+    </style>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  </head>
+  <body>
+    <div id="left">
+      <object data="room.svg" type="image/svg+xml" id="roomsvg">SVG not supported</object>
+    </div>
+
+    <div id="right">
+      <h3>Weather and Time of Day</h3>
+      <ul>
+	<li><a href="#" onclick="setDaylight(0)">Pitch black / close the blinds</a></li>
+	<li><a href="#" onclick="setDaylight(0.2)">Street lights</a></li>
+	<li><a href="#" onclick="setDaylight(0.4)">Evening</a></li>
+	<li><a href="#" onclick="setDaylight(0.6)">Cloudy Day</a></li>
+	<li><a href="#" onclick="setDaylight(0.8)">Bright Morning Light</a></li>
+	<li><a href="#" onclick="setDaylight(1)">Midday</a></li>
+      </ul>
+
+      <h3>Lighting Presets</h3>
+      <ul>
+	<li><a href="#" onclick="lightsOn()">Turn on all lights</a></li>
+	<li><a href="#" onclick="lightsOff()">Shut off all lights</a></li>
+	<li><a href="#" onclick="lightsForWhiteboard()">Illuminate the whiteboard for a lecture</a></li>
+	<li><a href="#" onclick="lightsForVideo()">Dim the lights for a video</a></li>
+	<li><a href="#" onclick="lightsForGroupArea()">Illuminate the group area</a></li>
+      </ul>
+
+      <h3>Daylight Harvesting</h3>
+      <p>Daylight Harvesting is <span class="off">off</span></p>
+      <ul>
+	<li>Toggle daylight harvesting</li>
+      </ul>
+      
+      <h3>Manual</h3>
+      <ul>
+	<li>Toggle light-setting overlay</li>
+      </ul>
+
+      <h3>ToDo</h3>
+      <ul>
+	<li>control individual lights</li>
+	<li>weather / time slider</li>
+      </ul>
+    </div>
+
+</body>
+
+  <script>
+    var svg;
+    function getSVG() {
+    if (svg) return svg;
+    return svg = document.getElementById('roomsvg').getSVGDocument();
+    }
+
+    function getLights() {
+    return getSVG().getElementById('lights').children;
+    }
+
+    function getWindows() {
+    return getSVG().getElementById('windows').getElementsByTagName('use');
+    }
+
+    
+    
+    
+    function lightsOff() {
+    _.each(getSVG().getElementById('lights').children, function(e, i) {
+    e.setAttribute('fill-opacity', '0');
+    });
+    }
+
+    function lightsOn() {
+    _.each(getSVG().getElementById('lights').children, function(e, i) {
+    e.setAttribute('fill-opacity', '1');
+    });
+    }
+
+    function lightsForWhiteboard() {
+    rowOpacities = [1, 0.3, 0.3, 0.3, 0.10, 0.10];
+    rowOpacities = rowOpacities.concat(rowOpacities, rowOpacities);
+    _applyLightOpacities(rowOpacities);
+    }
+
+    function lightsForVideo() {
+    rowOpacities = [0.3, 0.3, 0.3, 0.3, 0.3, 0.3];
+    rowOpacities = rowOpacities.concat(rowOpacities, [0,0,0,0,0,0]);
+    _applyLightOpacities(rowOpacities);
+    }
+
+    function lightsForGroupArea() {
+    rowOpacities = [0.10, 0.10, 0.10, 0.20, 0.70, 0.90];
+    rowOpacities = rowOpacities.concat(rowOpacities, rowOpacities);
+    _applyLightOpacities(rowOpacities);
+    }
+
+    
+
+    function setDaylight(pct) {
+    _.each(getWindows(), function(e) {
+    e.setAttribute('fill-opacity', pct);
+    });
+    }
+    
+
+
+    function _applyLightOpacities(opac) {
+    _.each(_.zip(getLights(), opac), function(e) {
+    e[0].setAttribute('fill-opacity', e[1]);
+    });
+    }
+</script>
+</html>
