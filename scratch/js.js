@@ -9,27 +9,34 @@ function getLights() {
     return getSVG().getElementById('lights').children;
 }
 
+function getLightsStatusText() {
+    return getSVG().querySelector("[name='lights-status-overlay']").children;
+}
+
 function getWindows() {
-    return getSVG().getElementById('windows').getElementsByTagName('use');
+    return getSVG().getElementById('windows').querySelectorAll('polygon');
 }
 
 /* utility functions */
 function _applyLightOpacities(opac) {
-    _.each(_.zip(getLights(), opac), function(e) {
+    _.each(_.zip(getLights(), opac, getLightsStatusText()), function(e) {
 	e[0].setAttribute('fill-opacity', e[1]);
+	e[2].innerHTML = e[1]*100 + '%';
     });
 }
 
 /* lighting preset functions */
 function lightsOff() {
-    _.each(getSVG().getElementById('lights').children, function(e, i) {
-	e.setAttribute('fill-opacity', '0');
+    _.each(_.zip(getLights(), getLightsStatusText()), function(e, i) {
+	e[0].setAttribute('fill-opacity', '0');
+	e[1].innerHTML = '0%';
     });
 }
 
 function lightsOn() {
-    _.each(getSVG().getElementById('lights').children, function(e, i) {
-	e.setAttribute('fill-opacity', '1');
+    _.each(_.zip(getLights(), getLightsStatusText()), function(e, i) {
+	e[0].setAttribute('fill-opacity', '1');
+	e[1].innerHTML = '100%';
     });
 }
 
@@ -52,12 +59,26 @@ function lightsForGroupArea() {
 }
 
 /* window control */
-function setDaylight(pct) {
+var setDaylight = $.throttle(333, function(pct) {
+    if (pct.hasOwnProperty('newValue'))
+	pct=pct.newValue;
     _.each(getWindows(), function(e) {
-	e.setAttribute('fill-opacity', pct);
+    	console.log(pct, e);
+    	e.setAttribute('fill-opacity', pct);
     });
+});
+
+
+/* overlay control */
+function toggleLabelsOverlay(setOn) {
+    var pct = setOn ? 1 : 0;
+    getSVG().querySelector("[name='labels-overlay']").setAttribute('opacity', pct);
 }
 
+function toggleLightStatusOverlay(setOn) {
+    var pct = setOn ? 1 : 0;
+    getSVG().querySelector("[name='lights-status-overlay']").setAttribute('opacity', pct);
+}
 
 /* ******************** SLIDER ******************** */
 $('#windowSlider').slider({
@@ -74,6 +95,9 @@ $('#windowSlider').slider({
     }})
     .on('slide', function(event) {
 	setDaylight(event.value);
+    })
+    .on('change', function(event) {
+	setDaylight(event.value);
     });
 
 
@@ -86,4 +110,23 @@ $("input[name='light-harvesting-checkbox']").bootstrapSwitch({
 	    console.log('ToDo: harvesting off');
 	}
     }
+});
+
+$("input[name='label-overlay-checkbox']").bootstrapSwitch({
+    onSwitchChange: function(event, isOn) {
+	toggleLabelsOverlay(isOn);
+    }
+});
+
+$("input[name='light-status-overlay-checkbox']").bootstrapSwitch({
+    onSwitchChange: function(event, isOn) {
+	toggleLightStatusOverlay(isOn);
+    }
+});
+
+$(document).ready(function() {
+    setTimeout(function() {
+	$("input[name='light-status-overlay-checkbox']").bootstrapSwitch('toggleState');
+	$("input[name='label-overlay-checkbox']").bootstrapSwitch('toggleState');
+    }, 1500);
 });
