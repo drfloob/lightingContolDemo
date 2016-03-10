@@ -75,3 +75,15 @@ $('#windowSlider').slider({
     .on('slide', function(event) {
 	setDaylight(event.value);
     });
+
+
+$("input[name='light-harvesting-checkbox']").bootstrapSwitch({
+    offColor: 'danger',
+    onSwitchChange: function(event, isOn) {
+	if(isOn) {
+	    console.log('ToDo: harvesting on');
+	} else {
+	    console.log('ToDo: harvesting off');
+	}
+    }
+});

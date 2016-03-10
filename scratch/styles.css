@@ -4,7 +4,6 @@
     margin-bottom: -100%;
 }
 
-
 #svgDiv {
     position: fixed;
     top: 20px;
@@ -23,6 +22,11 @@
     }
 }
 
+
+#right h3 {
+    text-align: center;
+}
+
 .slider.slider-horizontal {
     width: 90%;
     display: block;
@@ -33,6 +37,7 @@
     display: block;
 }
 
-#right h3 {
-    text-align: center;
+.bootstrap-switch {
+    display: block;
+    margin: 0 auto;
 }
