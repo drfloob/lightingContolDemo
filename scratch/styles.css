@@ -1,0 +1,34 @@
+#left {
+    background-color: #265770;
+    padding-bottom: 100%;
+    margin-bottom: -100%;
+}
+
+
+#svgDiv {
+    position: fixed;
+    top: 20px;
+    text-align: center;
+}
+
+@media (min-width: 992px) {
+    #svgDiv object {
+	width: 525px;
+    }
+}
+
+@media (min-width: 1200px) {
+    #svgDiv object {
+	width: 643px;
+    }
+}
+
+.slider.slider-horizontal {
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+}
+
+
+.glyphicon {
+}

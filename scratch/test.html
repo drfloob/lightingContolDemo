@@ -8,44 +8,11 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>  
+    <!-- ----- Bootstrap-slider ----- -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/6.1.3/css/bootstrap-slider.min.css" crossorigin="anonymous" />
 
-    <style>
-      
-      #left {
-      background-color: #265770;
-      padding-bottom: 100%;
-      margin-bottom: -100%;
-      }
+    <link rel="stylesheet" href="styles.css" />
 
-      
-      #svgDiv {
-      position: fixed;
-      top: 20px;
-      text-align: center;
-      }
-
-      #svgDiv.affix {
-      }
-      
-      @media (min-width: 992px) {
-      #svgDiv object {
-      width: 525px;
-      }
-      }
-
-      @media (min-width: 1200px) {
-      #svgDiv object {
-      width: 643px;
-      }
-      }
-
-</style>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -58,23 +25,28 @@
 	</div>
 	
 	<div class="col-md-offset-7 col-md-5" id="right">
-	  <h3>Weather and Time of Day</h3>
-	  <ul>
-	    <li><a href="#" onclick="setDaylight(0)">Pitch black / close the blinds</a></li>
-	    <li><a href="#" onclick="setDaylight(0.2)">Street lights</a></li>
-	    <li><a href="#" onclick="setDaylight(0.4)">Evening</a></li>
-	    <li><a href="#" onclick="setDaylight(0.6)">Cloudy Day</a></li>
-	    <li><a href="#" onclick="setDaylight(0.8)">Bright Morning Light</a></li>
-	    <li><a href="#" onclick="setDaylight(1)">Midday</a></li>
-	  </ul>
+	  <h3>Windows (Weather and Time of Day)</h3>
+	  <input
+	     id="windowSlider"
+	     type="text"
+	     name="somename"
+	     data-provide="slider"
+	     data-slider-min="0"
+	     data-slider-max="1"
+	     data-slider-step="0.2"
+	     data-slider-value="0.8"
+	     data-slider-tooltip="show"
+	     data-slider-formatter="windowSliderValueFormatter"
+	     >
+
 
 	  <h3>Lighting Presets</h3>
 	  <ul>
-	    <li><a href="#" onclick="lightsOn()">Turn on all lights</a></li>
-	    <li><a href="#" onclick="lightsOff()">Shut off all lights</a></li>
 	    <li><a href="#" onclick="lightsForWhiteboard()">Illuminate the whiteboard for a lecture</a></li>
 	    <li><a href="#" onclick="lightsForVideo()">Dim the lights for a video</a></li>
 	    <li><a href="#" onclick="lightsForGroupArea()">Illuminate the group area</a></li>
+	    <li><a href="#" onclick="lightsOn()"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Turn on all lights</a></li>
+	    <li><a href="#" onclick="lightsOff()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Shut off all lights</a></li>
 	  </ul>
 
 	  <h3>Daylight Harvesting</h3>
@@ -101,68 +73,11 @@
     </div>
   </body>
 
-  <script>
-    var svg;
-    function getSVG() {
-    if (svg) return svg;
-    return svg = document.getElementById('roomsvg').getSVGDocument();
-    }
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/6.1.3/bootstrap-slider.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
-    function getLights() {
-    return getSVG().getElementById('lights').children;
-    }
-
-    function getWindows() {
-    return getSVG().getElementById('windows').getElementsByTagName('use');
-    }
-
-    
-    
-    
-    function lightsOff() {
-    _.each(getSVG().getElementById('lights').children, function(e, i) {
-    e.setAttribute('fill-opacity', '0');
-    });
-    }
-
-    function lightsOn() {
-    _.each(getSVG().getElementById('lights').children, function(e, i) {
-    e.setAttribute('fill-opacity', '1');
-    });
-    }
-
-    function lightsForWhiteboard() {
-    rowOpacities = [1, 0.3, 0.3, 0.3, 0.10, 0.10];
-    rowOpacities = rowOpacities.concat(rowOpacities, rowOpacities);
-    _applyLightOpacities(rowOpacities);
-    }
-
-    function lightsForVideo() {
-    rowOpacities = [0.3, 0.3, 0.3, 0.3, 0.3, 0.3];
-    rowOpacities = rowOpacities.concat(rowOpacities, [0,0,0,0,0,0]);
-    _applyLightOpacities(rowOpacities);
-    }
-
-    function lightsForGroupArea() {
-    rowOpacities = [0.10, 0.10, 0.10, 0.20, 0.70, 0.90];
-    rowOpacities = rowOpacities.concat(rowOpacities, rowOpacities);
-    _applyLightOpacities(rowOpacities);
-    }
-
-    
-
-    function setDaylight(pct) {
-    _.each(getWindows(), function(e) {
-    e.setAttribute('fill-opacity', pct);
-    });
-    }
-    
-
-
-    function _applyLightOpacities(opac) {
-    _.each(_.zip(getLights(), opac), function(e) {
-    e[0].setAttribute('fill-opacity', e[1]);
-    });
-    }
-  </script>
+    <script src="js.js"></script>
 </html>
