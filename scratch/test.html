@@ -57,11 +57,11 @@
 	    <div class="panel-heading"><div class="panel-title">Lighting Presets</div></div>
 	    <div class="panel-body">
 	      <div class="btn-group-vertical" role="group" >
-		<button type="button" class="btn btn-sm btn-primary" onclick="lightsOn()"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Turn on all lights</button>
+		<button type="button" class="btn btn-sm btn-default" onclick="lightsOn()"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Turn on all lights</button>
 		<button type="button" class="btn btn-sm btn-default" onclick="lightsForWhiteboard()">Illuminate the whiteboard for a lecture</button>
 		<button type="button" class="btn btn-sm btn-default" onclick="lightsForVideo()">Dim the lights for a video</button>
 		<button type="button" class="btn btn-sm btn-default" onclick="lightsForGroupArea()">Illuminate the group area</button>
-		<button type="button" class="btn btn-sm btn-danger" onclick="lightsOff()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Shut off all lights</button>
+		<button type="button" class="btn btn-sm btn-default" onclick="lightsOff()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Shut off all lights</button>
 	      </div>
 	    </div>
 	  </div>
@@ -79,14 +79,21 @@
 	  
 	  
 	  <div class="panel panel-default">
-	    <div class="panel-heading"><div class="panel-title">Manual</div></div>
+	    <div class="panel-heading"><div class="panel-title">Light status overlay</div></div>
 	    <div class="panel-body">
-	      <ul>
-		<li>Toggle light-setting overlay</li>
-	      </ul>
+	      <input type="checkbox" name="light-status-overlay-checkbox" />
 	    </div>
 	  </div>
 
+	  
+	  <div class="panel panel-default">
+	    <div class="panel-heading"><div class="panel-title">Labels overlay</div></div>
+	    <div class="panel-body">
+	      <input type="checkbox" name="label-overlay-checkbox" checked />
+	    </div>
+	  </div>
+
+	  
 	  <div class="panel panel-default">
 	    <div class="panel-heading"><div class="panel-title">ToDo</div></div>
 	    <div class="panel-body">
