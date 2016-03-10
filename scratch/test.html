@@ -34,50 +34,72 @@
 	</div>
 	
 	<div class="col-sm-5 col-md-5" id="right">
-	  <h3>Windows (Weather/Time)</h3>
-	  <input
-	     id="windowSlider"
-	     type="text"
-	     name="somename"
-	     data-provide="slider"
-	     data-slider-min="0"
-	     data-slider-max="1"
-	     data-slider-step="0.2"
-	     data-slider-value="0.8"
-	     data-slider-tooltip="show"
-	     data-slider-formatter="windowSliderValueFormatter"
-	     >
 
-
-	  <h3>Lighting Presets</h3>
-	  <div class="btn-group-vertical" role="group">
-	    <button type="button" class="btn btn-sm btn-primary" onclick="lightsOn()"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Turn on all lights</button>
-	    <button type="button" class="btn btn-sm btn-default" onclick="lightsForWhiteboard()">Illuminate the whiteboard for a lecture</button>
-	    <button type="button" class="btn btn-sm btn-default" onclick="lightsForVideo()">Dim the lights for a video</button>
-	    <button type="button" class="btn btn-sm btn-default" onclick="lightsForGroupArea()">Illuminate the group area</button>
-	    <button type="button" class="btn btn-sm btn-danger" onclick="lightsOff()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Shut off all lights</button>
+	  <div class="panel panel-default">
+	    <div class="panel-heading"><div class="panel-title">Windows (Weather/Time)</div></div>
+	    <div class="panel-body">
+	      <input
+		 id="windowSlider"
+		 type="text"
+		 name="somename"
+		 data-provide="slider"
+		 data-slider-min="0"
+		 data-slider-max="1"
+		 data-slider-step="0.2"
+		 data-slider-value="0.8"
+		 data-slider-tooltip="show"
+		 data-slider-formatter="windowSliderValueFormatter"
+		 >
+	    </div>
 	  </div>
 
-	  <h3>Daylight Harvesting</h3>
-	  <input type="checkbox" name="light-harvesting-checkbox" />
+	  <div class="panel panel-default">
+	    <div class="panel-heading"><div class="panel-title">Lighting Presets</div></div>
+	    <div class="panel-body">
+	      <div class="btn-group-vertical" role="group" >
+		<button type="button" class="btn btn-sm btn-primary" onclick="lightsOn()"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Turn on all lights</button>
+		<button type="button" class="btn btn-sm btn-default" onclick="lightsForWhiteboard()">Illuminate the whiteboard for a lecture</button>
+		<button type="button" class="btn btn-sm btn-default" onclick="lightsForVideo()">Dim the lights for a video</button>
+		<button type="button" class="btn btn-sm btn-default" onclick="lightsForGroupArea()">Illuminate the group area</button>
+		<button type="button" class="btn btn-sm btn-danger" onclick="lightsOff()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Shut off all lights</button>
+	      </div>
+	    </div>
+	  </div>
+	    
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <div class="panel-title clearfix">
+		Daylight Harvesting
+	      </div>
+	    </div>
+	    <div class="panel-body">
+	      <input type="checkbox" name="light-harvesting-checkbox" />
+	    </div>
+	  </div>
 	  
-	  <h3>Manual</h3>
-	  <ul>
-	    <li>Toggle light-setting overlay</li>
-	  </ul>
+	  
+	  <div class="panel panel-default">
+	    <div class="panel-heading"><div class="panel-title">Manual</div></div>
+	    <div class="panel-body">
+	      <ul>
+		<li>Toggle light-setting overlay</li>
+	      </ul>
+	    </div>
+	  </div>
 
-	  <h3>ToDo</h3>
-	  <ul>
-	    <li>control individual lights</li>
-	  </ul>
-
-	  <p>More Stuff</p><p>More Stuff</p><p>More Stuff</p><p>More Stuff</p><p>More Stuff</p><p>More Stuff</p><p>More Stuff</p><p>More Stuff</p>
-
+	  <div class="panel panel-default">
+	    <div class="panel-heading"><div class="panel-title">ToDo</div></div>
+	    <div class="panel-body">
+	      <ul>
+		<li>control individual lights</li>
+	      </ul>
+	    </div>
+	  </div>
 	</div>
       </div>
     </div>
   </body>
-
+  
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>  
