@@ -13,15 +13,27 @@
   </head>
   <body>
     <div class="container">
-      <div class="row">
+      <div class="header clearfix">
+	<nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">About</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Digital Lighting Control System UI Prototype</h3>
+      </div>
+      
 
-	<div class="col-md-7" id="left">
-	  <div id="svgDiv" data-spy="affix" data-offset-top="1">
+
+      <div class="row">
+	<div class="col-sm-7 col-md-7" id="left">
+	  &nbsp;
+	  <div id="svgDiv" data-spy="affix" data-offset-top="90">
 	    <object data="room.svg" type="image/svg+xml" id="roomsvg">SVG not supported</object>
 	  </div>
 	</div>
 	
-	<div class="col-md-offset-7 col-md-5" id="right">
+	<div class="col-sm-5 col-md-5" id="right">
 	  <h3>Windows (Weather/Time)</h3>
 	  <input
 	     id="windowSlider"
@@ -57,7 +69,6 @@
 	  <h3>ToDo</h3>
 	  <ul>
 	    <li>control individual lights</li>
-	    <li>weather / time slider</li>
 	  </ul>
 
 	  <p>More Stuff</p><p>More Stuff</p><p>More Stuff</p><p>More Stuff</p><p>More Stuff</p><p>More Stuff</p><p>More Stuff</p><p>More Stuff</p>

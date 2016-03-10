@@ -1,3 +1,20 @@
+body {
+    padding: 20px 0 20px 0;
+}
+
+.header {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.header h3 {
+    margin: 0 auto;
+    line-height: 40px;
+}
+
+/* ******************** LEFT ******************** */
+
 #left {
     background-color: #265770;
     padding-bottom: 100%;
@@ -5,14 +22,24 @@
 }
 
 #svgDiv {
+    margin-top: 10px;
+}
+
+#svgDiv.affix {
     position: fixed;
     top: 20px;
     text-align: center;
 }
 
+@media (min-width: 768px) {
+    #svgDiv object {
+	width: 410px;
+    }
+}
+
 @media (min-width: 992px) {
     #svgDiv object {
-	width: 525px;
+	width: 527px;
     }
 }
 
@@ -22,6 +49,7 @@
     }
 }
 
+/* ******************** RIGHT ******************** */
 
 #right h3 {
     text-align: center;
@@ -31,6 +59,14 @@
     width: 90%;
     display: block;
     margin: 0 auto;
+}
+
+.slider-selection {
+    background: #f1e05a;
+}
+
+.slider-track-high {
+    background: #eee;
 }
 
 .btn-group-vertical {
