@@ -25,7 +25,7 @@
 	</div>
 	
 	<div class="col-md-offset-7 col-md-5" id="right">
-	  <h3>Windows (Weather and Time of Day)</h3>
+	  <h3>Windows (Weather/Time)</h3>
 	  <input
 	     id="windowSlider"
 	     type="text"
@@ -41,13 +41,13 @@
 
 
 	  <h3>Lighting Presets</h3>
-	  <ul>
-	    <li><a href="#" onclick="lightsForWhiteboard()">Illuminate the whiteboard for a lecture</a></li>
-	    <li><a href="#" onclick="lightsForVideo()">Dim the lights for a video</a></li>
-	    <li><a href="#" onclick="lightsForGroupArea()">Illuminate the group area</a></li>
-	    <li><a href="#" onclick="lightsOn()"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Turn on all lights</a></li>
-	    <li><a href="#" onclick="lightsOff()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Shut off all lights</a></li>
-	  </ul>
+	  <div class="btn-group-vertical" role="group">
+	    <button type="button" class="btn btn-sm btn-primary" onclick="lightsOn()"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Turn on all lights</button>
+	    <button type="button" class="btn btn-sm btn-default" onclick="lightsForWhiteboard()">Illuminate the whiteboard for a lecture</button>
+	    <button type="button" class="btn btn-sm btn-default" onclick="lightsForVideo()">Dim the lights for a video</button>
+	    <button type="button" class="btn btn-sm btn-default" onclick="lightsForGroupArea()">Illuminate the group area</button>
+	    <button type="button" class="btn btn-sm btn-danger" onclick="lightsOff()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Shut off all lights</button>
+	  </div>
 
 	  <h3>Daylight Harvesting</h3>
 	  <p>Daylight Harvesting is <span class="off">off</span></p>

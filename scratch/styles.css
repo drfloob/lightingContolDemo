@@ -29,6 +29,10 @@
     margin: 0 auto;
 }
 
+.btn-group-vertical {
+    display: block;
+}
 
-.glyphicon {
+#right h3 {
+    text-align: center;
 }
