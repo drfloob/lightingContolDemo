@@ -2,82 +2,104 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- ---------- BOOTSTRAP ------------- -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>  
+
     <style>
-      body {
-      padding: 0;
-      margin: 0;
-      background-color: white;
+      
+      #left {
+      background-color: #265770;
+      padding-bottom: 100%;
+      margin-bottom: -100%;
       }
 
-      div#left {
-      float: left;
-      width: 66%;
-      height: 100vh;
-      background-color: #265770;
-      /* background-color: #3D8FB8; */
+      
+      #svgDiv {
+      position: fixed;
+      top: 20px;
       text-align: center;
       }
 
-      div#left object {
-      margin-top: 5em;
-      max-width: 90%;
-      }
-
-      div#right {
-      float: left;
+      #svgDiv.affix {
       }
       
-      ul {
-      list-style-position: inside;
+      @media (min-width: 992px) {
+      #svgDiv object {
+      width: 525px;
+      }
       }
 
-    </style>
+      @media (min-width: 1200px) {
+      #svgDiv object {
+      width: 643px;
+      }
+      }
+
+</style>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   </head>
   <body>
-    <div id="left">
-      <object data="room.svg" type="image/svg+xml" id="roomsvg">SVG not supported</object>
+    <div class="container">
+      <div class="row">
+
+	<div class="col-md-7" id="left">
+	  <div id="svgDiv" data-spy="affix" data-offset-top="1">
+	    <object data="room.svg" type="image/svg+xml" id="roomsvg">SVG not supported</object>
+	  </div>
+	</div>
+	
+	<div class="col-md-offset-7 col-md-5" id="right">
+	  <h3>Weather and Time of Day</h3>
+	  <ul>
+	    <li><a href="#" onclick="setDaylight(0)">Pitch black / close the blinds</a></li>
+	    <li><a href="#" onclick="setDaylight(0.2)">Street lights</a></li>
+	    <li><a href="#" onclick="setDaylight(0.4)">Evening</a></li>
+	    <li><a href="#" onclick="setDaylight(0.6)">Cloudy Day</a></li>
+	    <li><a href="#" onclick="setDaylight(0.8)">Bright Morning Light</a></li>
+	    <li><a href="#" onclick="setDaylight(1)">Midday</a></li>
+	  </ul>
+
+	  <h3>Lighting Presets</h3>
+	  <ul>
+	    <li><a href="#" onclick="lightsOn()">Turn on all lights</a></li>
+	    <li><a href="#" onclick="lightsOff()">Shut off all lights</a></li>
+	    <li><a href="#" onclick="lightsForWhiteboard()">Illuminate the whiteboard for a lecture</a></li>
+	    <li><a href="#" onclick="lightsForVideo()">Dim the lights for a video</a></li>
+	    <li><a href="#" onclick="lightsForGroupArea()">Illuminate the group area</a></li>
+	  </ul>
+
+	  <h3>Daylight Harvesting</h3>
+	  <p>Daylight Harvesting is <span class="off">off</span></p>
+	  <ul>
+	    <li>Toggle daylight harvesting</li>
+	  </ul>
+	  
+	  <h3>Manual</h3>
+	  <ul>
+	    <li>Toggle light-setting overlay</li>
+	  </ul>
+
+	  <h3>ToDo</h3>
+	  <ul>
+	    <li>control individual lights</li>
+	    <li>weather / time slider</li>
+	  </ul>
+
+	  <p>More Stuff</p><p>More Stuff</p><p>More Stuff</p><p>More Stuff</p><p>More Stuff</p><p>More Stuff</p><p>More Stuff</p><p>More Stuff</p>
+
+	</div>
+      </div>
     </div>
-
-    <div id="right">
-      <h3>Weather and Time of Day</h3>
-      <ul>
-	<li><a href="#" onclick="setDaylight(0)">Pitch black / close the blinds</a></li>
-	<li><a href="#" onclick="setDaylight(0.2)">Street lights</a></li>
-	<li><a href="#" onclick="setDaylight(0.4)">Evening</a></li>
-	<li><a href="#" onclick="setDaylight(0.6)">Cloudy Day</a></li>
-	<li><a href="#" onclick="setDaylight(0.8)">Bright Morning Light</a></li>
-	<li><a href="#" onclick="setDaylight(1)">Midday</a></li>
-      </ul>
-
-      <h3>Lighting Presets</h3>
-      <ul>
-	<li><a href="#" onclick="lightsOn()">Turn on all lights</a></li>
-	<li><a href="#" onclick="lightsOff()">Shut off all lights</a></li>
-	<li><a href="#" onclick="lightsForWhiteboard()">Illuminate the whiteboard for a lecture</a></li>
-	<li><a href="#" onclick="lightsForVideo()">Dim the lights for a video</a></li>
-	<li><a href="#" onclick="lightsForGroupArea()">Illuminate the group area</a></li>
-      </ul>
-
-      <h3>Daylight Harvesting</h3>
-      <p>Daylight Harvesting is <span class="off">off</span></p>
-      <ul>
-	<li>Toggle daylight harvesting</li>
-      </ul>
-      
-      <h3>Manual</h3>
-      <ul>
-	<li>Toggle light-setting overlay</li>
-      </ul>
-
-      <h3>ToDo</h3>
-      <ul>
-	<li>control individual lights</li>
-	<li>weather / time slider</li>
-      </ul>
-    </div>
-
-</body>
+  </body>
 
   <script>
     var svg;
@@ -142,5 +164,5 @@
     e[0].setAttribute('fill-opacity', e[1]);
     });
     }
-</script>
+  </script>
 </html>
