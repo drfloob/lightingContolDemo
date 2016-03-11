@@ -2,6 +2,8 @@
 
 var daylightHarvesting = false;
 var daylightHarvestingSetting = 0.7;
+var baseLightsSetting = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var windowsLightSetting = 0.8;
 
 /* ******************** SVG Interaction ******************** */
 var svg;
@@ -30,10 +32,11 @@ function getWindows() {
 
 /* utility functions */
 function _applyLightOpacities(opac) {
+    baseLightsSetting = opac;
     _.each(_.zip(getLights(), opac, getLightsStatusTextNodes()), function(e, i) {
 	pct = e[1];
 	if (i < 6 && daylightHarvesting) {
-	    pct *= daylightHarvestingSetting;
+	    pct -= pct * daylightHarvestingSetting * windowsLightSetting;
 	}
 	e[0].setAttribute('fill-opacity', pct);
 	e[2].innerHTML = (pct*100).toFixed(0) + '%';
@@ -42,17 +45,11 @@ function _applyLightOpacities(opac) {
 
 /* lighting preset functions */
 function lightsOff() {
-    _.each(_.zip(getLights(), getLightsStatusTextNodes()), function(e, i) {
-	e[0].setAttribute('fill-opacity', '0');
-	e[1].innerHTML = '0%';
-    });
+    _applyLightOpacities([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
 }
 
 function lightsOn() {
-    _.each(_.zip(getLights(), getLightsStatusTextNodes()), function(e, i) {
-	e[0].setAttribute('fill-opacity', '1');
-	e[1].innerHTML = '100%';
-    });
+    _applyLightOpacities([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
 }
 
 function lightsForWhiteboard() {
@@ -77,9 +74,11 @@ function lightsForGroupArea() {
 var setDaylight = $.throttle(333, function(pct) {
     if (pct.hasOwnProperty('newValue'))
 	pct=pct.newValue;
+    windowsLightSetting = pct;
     _.each(getWindows(), function(e) {
     	e.setAttribute('fill-opacity', pct);
     });
+    _applyLightOpacities(baseLightsSetting);
 });
 
 
@@ -97,12 +96,7 @@ function toggleLightStatusOverlay(setOn) {
 /* harvesting */
 function toggleHarvesting(isOn) {
     daylightHarvesting = isOn;
-    var arr = _.map(getLightStatesArray(), function(e, i) {
-	if (i < 6 && !isOn) {
-	    return e /= daylightHarvestingSetting;
-	} else return e;
-    });
-    _applyLightOpacities(arr);
+    _applyLightOpacities(baseLightsSetting);
 }
 
 /* ******************** SLIDER ******************** */
