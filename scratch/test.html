@@ -16,8 +16,8 @@
       <div class="header clearfix">
 	<nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="#">About</a></li>
+            <li role="presentation"><a href="#">Home</a></li>
+            <li role="presentation" class="active"><a href="#" data-toggle="modal" data-target="#aboutModal">About</a></li>
           </ul>
         </nav>
         <h3 class="text-muted">Digital Lighting Control System UI Prototype</h3>
@@ -103,6 +103,37 @@
 		<li>control individual lights</li>
 	      </ul>
 	    </div>
+	  </div>
+	</div>
+      </div>
+    </div>
+
+
+    <!-- Modals -->
+    <!-- Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">About the Digital Lighting Control System UI Prototype</h4>
+	  </div>
+	  <div class="modal-body">
+	    <p>Created by <a href="http://drfloob.com">AJ Heller</a>, March 2016. I'm currently <strong class="money"><em>available for hire</em></strong>.</p>
+	    <ul>
+	      <li><a href="mailto: aj@drfloob.com">Email me!</a></li>
+	      <li><a href="tel://1-657-333-5662">Call or Text me!</a></li>
+	    </ul>
+	    <hr />
+	    <p>This demo was built to showcase prototyping skills with <strong>HTML</strong>, <strong>CSS</strong>, <strong>Javascript</strong>, <strong>Bootstrap</strong>, <strong>SVG</strong>, <strong>SQL</strong>, and <strong>Node.js</strong>. Created and deployed on <strong>Linux</strong> machines than I setup and maintain.</p>
+	    <p>With all the possibilities available in digital lighting systems, the big challenge here is to limit this demo to a reasonable scope. I chose to implement one kind of light and a global daylight sensor, that live in a simulated classroom with exterior windows, a whiteboard, a group area, a group of student desks, and a video screen.</p>
+	    <p>You can:</p>
+	    <ul>
+	      <li>choose from a handful of lighting presets, </li>
+	      <li>toggle daylight harvesting, </li>
+	      <li>view light settings and label overlays, and </li>
+	      <li>simulate various daylight conditions to see how the lighting presets react.</li>
+	    </ul>
 	  </div>
 	</div>
       </div>

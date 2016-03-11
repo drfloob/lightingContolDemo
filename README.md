@@ -12,14 +12,16 @@ With all the possibilities available in digital lighting systems, the big challe
 
 ## Implementation
 
-Front-end created with Bootstrap, riot.js, Underscore.js, and SVG (HTML, CSS, and JavaScript implied). Backend implemented in Python, Flask, and Sqlite3.
+Front-end created with Bootstrap, riot.js, Underscore.js, and SVG (HTML, CSS, and JavaScript implied). Backend implemented in Node.js and Sqlite3.
 
 
 
 ## Fun things that didn't get implemented in this prototype
 
+ * individual light control
  * light & sensor groups
- * lighting-group-specific lighting presets
+ * lighting-group-specific presets
+ * occupancy detection
  * smart (reactive) occupancy settings
  * multiple concurrent lighting presets (potentially with conflicted settings)
  * the ability to burn out lights
