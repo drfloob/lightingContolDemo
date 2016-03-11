@@ -130,3 +130,10 @@ $(document).ready(function() {
 	$("input[name='label-overlay-checkbox']").bootstrapSwitch('toggleState');
     }, 1500);
 });
+
+
+/* ******************** Affix Bug hack ******************** */
+
+$(document).ready(function() {
+    $('#svgDivSpaceWrapper').height($('#svgDiv').height());
+});
