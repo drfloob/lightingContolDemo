@@ -1,3 +1,8 @@
+/* ******************** Globals, yuck ******************** */
+
+var daylightHarvesting = false;
+var daylightHarvestingSetting = 0.7;
+
 /* ******************** SVG Interaction ******************** */
 var svg;
 function getSVG() {
@@ -9,8 +14,14 @@ function getLights() {
     return getSVG().getElementById('lights').children;
 }
 
-function getLightsStatusText() {
+function getLightsStatusTextNodes() {
     return getSVG().querySelector("[name='lights-status-overlay']").children;
+}
+
+function getLightStatesArray() {
+    return _.map(getLights(), function(n) {
+	return n.getAttribute('fill-opacity');
+    });
 }
 
 function getWindows() {
@@ -19,22 +30,26 @@ function getWindows() {
 
 /* utility functions */
 function _applyLightOpacities(opac) {
-    _.each(_.zip(getLights(), opac, getLightsStatusText()), function(e) {
-	e[0].setAttribute('fill-opacity', e[1]);
-	e[2].innerHTML = e[1]*100 + '%';
+    _.each(_.zip(getLights(), opac, getLightsStatusTextNodes()), function(e, i) {
+	pct = e[1];
+	if (i < 6 && daylightHarvesting) {
+	    pct *= daylightHarvestingSetting;
+	}
+	e[0].setAttribute('fill-opacity', pct);
+	e[2].innerHTML = (pct*100).toFixed(0) + '%';
     });
 }
 
 /* lighting preset functions */
 function lightsOff() {
-    _.each(_.zip(getLights(), getLightsStatusText()), function(e, i) {
+    _.each(_.zip(getLights(), getLightsStatusTextNodes()), function(e, i) {
 	e[0].setAttribute('fill-opacity', '0');
 	e[1].innerHTML = '0%';
     });
 }
 
 function lightsOn() {
-    _.each(_.zip(getLights(), getLightsStatusText()), function(e, i) {
+    _.each(_.zip(getLights(), getLightsStatusTextNodes()), function(e, i) {
 	e[0].setAttribute('fill-opacity', '1');
 	e[1].innerHTML = '100%';
     });
@@ -63,7 +78,6 @@ var setDaylight = $.throttle(333, function(pct) {
     if (pct.hasOwnProperty('newValue'))
 	pct=pct.newValue;
     _.each(getWindows(), function(e) {
-    	console.log(pct, e);
     	e.setAttribute('fill-opacity', pct);
     });
 });
@@ -78,6 +92,17 @@ function toggleLabelsOverlay(setOn) {
 function toggleLightStatusOverlay(setOn) {
     var pct = setOn ? 1 : 0;
     getSVG().querySelector("[name='lights-status-overlay']").setAttribute('opacity', pct);
+}
+
+/* harvesting */
+function toggleHarvesting(isOn) {
+    daylightHarvesting = isOn;
+    var arr = _.map(getLightStatesArray(), function(e, i) {
+	if (i < 6 && !isOn) {
+	    return e /= daylightHarvestingSetting;
+	} else return e;
+    });
+    _applyLightOpacities(arr);
 }
 
 /* ******************** SLIDER ******************** */
@@ -102,23 +127,21 @@ $('#windowSlider').slider({
 
 
 $("input[name='light-harvesting-checkbox']").bootstrapSwitch({
-    offColor: 'danger',
+    state: false,
     onSwitchChange: function(event, isOn) {
-	if(isOn) {
-	    console.log('ToDo: harvesting on');
-	} else {
-	    console.log('ToDo: harvesting off');
-	}
+	toggleHarvesting(isOn);
     }
 });
 
 $("input[name='label-overlay-checkbox']").bootstrapSwitch({
+    state: true,
     onSwitchChange: function(event, isOn) {
 	toggleLabelsOverlay(isOn);
     }
 });
 
 $("input[name='light-status-overlay-checkbox']").bootstrapSwitch({
+    state: true,
     onSwitchChange: function(event, isOn) {
 	toggleLightStatusOverlay(isOn);
     }
