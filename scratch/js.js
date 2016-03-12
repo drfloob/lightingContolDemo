@@ -146,11 +146,18 @@ $(document).ready(function() {
 	$("input[name='light-status-overlay-checkbox']").bootstrapSwitch('toggleState');
 	$("input[name='label-overlay-checkbox']").bootstrapSwitch('toggleState');
     }, 1500);
-});
 
-
-/* ******************** Affix Bug hack ******************** */
-
-$(document).ready(function() {
+    // affix bug hack
     $('#svgDivSpaceWrapper').height($('#svgDiv').height());
+
+    var md = new MobileDetect(window.navigator.userAgent);
+    var uap = new UAParser();
+    
+    if (md.mobile()) {
+	$("#mobileModal").modal();
+    } else if (_.indexOf(['Chrome', 'Chromium', 'Firefox'], uap.getBrowser().name) == -1) {
+	$("#untestedBrowserModal").modal();
+    }
 });
+
+
