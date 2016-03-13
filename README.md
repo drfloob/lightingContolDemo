@@ -4,15 +4,15 @@ A proof-of-concept web dashboard for a (hypothetical) digital interior lighting 
 
 
 
-## Research and Design
-
-With all the possibilities available in digital lighting systems, the big challenge here is to limit the scope of this demo to a reasonable size. I chose to implement one kind of light and a daylight sensor, that live in a simulated classroom with exterior windows, a whiteboard, a group area, and a video screen. You can choose from a handful of lighting presets, control individual lights, query individual lights for their status, and simulate various daylight conditions to see how the lighting presets react.
-
-
-
 ## Implementation
 
-Front-end created with Bootstrap, riot.js, Underscore.js, and SVG (HTML, CSS, and JavaScript implied). Backend implemented in Node.js and Sqlite3.
+Created with Bootstrap, Underscore.js, and SVG (HTML, CSS, and JavaScript implied).
+
+
+
+## Research and Design
+
+With all the possibilities available in digital lighting systems, it was a challenge to limit this demo to a reasonable scope. I chose to implement one kind of light and a global daylight sensor, that live in a simulated classroom with exterior windows, a whiteboard, a group area, a group of student desks, and a video screen.
 
 
 
@@ -31,3 +31,9 @@ Front-end created with Bootstrap, riot.js, Underscore.js, and SVG (HTML, CSS, an
  * es6 detection
  * svg capability detection
  * mobile and portrait-aspect-ratio compatibility
+ * A Node.js / Sqlite3 backend*
+
+
+## *Node.js / Sqlite3 backend
+
+In writing this demo, I found a bug related to the express.js web framework that prevents a server using Sqlite3-based session storage from ever closing a connection, apparently due to an incorrect Content-length response header. I'll follow up with this bug, and hopefully improve the project.
