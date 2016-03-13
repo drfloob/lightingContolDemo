@@ -36,4 +36,4 @@ With all the possibilities available in digital lighting systems, it was a chall
 
 ## *Node.js / Sqlite3 backend
 
-In writing this demo, I found a bug related to the express.js web framework that prevents a server using Sqlite3-based session storage from ever closing a connection, apparently due to an incorrect Content-length response header. I'll follow up with this bug, and hopefully improve the project.
+In writing a backend for this demo, I found a bug related to the express.js web framework that prevents a server using Sqlite3-based session storage from ever finishing a response, preventing browsers from closing the connection. [Here is the patch I wrote](https://github.com/rawberg/connect-sqlite3/pull/13) to fix the problem, it's now part of the `connect-sqlite3` project.
